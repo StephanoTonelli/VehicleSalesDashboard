@@ -1,2 +1,2 @@
 
-auth = "https://parallelum.com.br/fipe/api/v1/carros/marcas"
+auth = r"D:\DocumentsSte\VSCode\Proj1Streamlit\resources\car_prices.csv"

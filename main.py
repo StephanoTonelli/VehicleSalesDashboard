@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from app.data_handler import df
+from app.model import model
+
 
 
 
