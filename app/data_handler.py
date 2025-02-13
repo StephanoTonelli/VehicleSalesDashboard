@@ -4,6 +4,11 @@ import matplotlib.pyplot as plt
 
 from config.auth import auth
 
-df = pd.read_csv(auth)
+data = pd.read_csv(auth)
+
+df = pd.DataFrame(data)
+
+df = df.dropna()
+df = df.drop_duplicates()
 
 
