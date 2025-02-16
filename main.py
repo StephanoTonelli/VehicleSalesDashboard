@@ -26,6 +26,12 @@ if first_year_filtered:
 else:
     filtered_df = df  # Show all data if no selection
 
+# State filter
+body_filtered = st.sidebar.multiselect("Select State", sorted(filtered_df['state'].unique()))
+if body_filtered:
+    filtered_df = filtered_df[filtered_df['state'].isin(body_filtered)]
+else:
+    filtered_df = filtered_df
 
 # Make filter
 make_filtered = st.sidebar.multiselect("Select Make", sorted(filtered_df['make'].unique()))
