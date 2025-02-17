@@ -28,21 +28,21 @@ https://www.kaggle.com/datasets/syedanwarafridi/vehicle-sales-data/data
 
 ### Intended results
 
-- Best selling brand  -> X 
-- Best selling model in the brand  -> X 
-- best selling brand in body type  -> X 
-- best selling model in body type  -> X 
-- Best seller  -> X 
-- selling trend of the best model over the years  -> X 
 
+- Best selling brand  -> **Best_Brand**
+- Best selling model in the brand  -> **Best_Model**
+- best selling brand in body type  -> **Best_Brand_Body_Type**
+- best selling model in body type  -> **Best_Model_Body_Type**
+- Best seller  -> **Best_Seller**
+- selling trend of the best model over the years  -> **Best_Model_Trend**
 
-- average price of the model selected and distribution of the prices - with average of mmr -> X 
-- distribution of prices by brand and by category -> X 
+- average price of the model selected and distribution of the prices - with average of mmr -> **Average_Price_Distribution**
+- distribution of prices by brand and by category -> **Price_Distribution_Brand_Category**
 
-- seasonal prices for each model -> X
-- seasonal number of sales per make -> X
+- seasonal prices for each model -> **Seasonal_Prices**
+- seasonal number of sales per make -> **Seasonal_Sales**
 
-- correlation of odometer and price -> X
-- correlation of color and price -> X
-- correlation of transmission and price - compare means -> X
-- correlation of condition and price -> X
+- correlation of odometer and price -> **odometer_price_correlation**
+- correlation of color and price -> **color_price_correlation**
+- correlation of transmission and price - compare means -> **transmission_price_correlation**
+- correlation of condition and price -> **condition_price_correlation**
