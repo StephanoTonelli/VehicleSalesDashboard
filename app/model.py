@@ -50,7 +50,7 @@ def best_brand_body_type(filtered_df):
 
     #change name of columns
     max_sales_per_body.rename(columns={'sum_x': 'Make','sum_y': 'Total_SellingPrice'}, inplace=True)
-    
+
     return max_sales_per_body
 
 def best_model_body_type(filtered_df):
@@ -74,6 +74,7 @@ def best_model_body_type(filtered_df):
 def best_seller(filtered_df):
     # group by body and make and get the sum of sellingprice
     df_seller_value1 = filtered_df.groupby("seller")[["sellingprice"]].sum().sort_values(by="sellingprice", ascending=False)
+
     return df_seller_value1
 
 def best_model_trend(filtered_df):
@@ -106,6 +107,8 @@ def average_price_distribution(filtered_df):
 
     # calculates the average of the "Selling Price" and "mmr" columns for each unique value in the "saledate" column
     df1 = df1.groupby('Year_month').agg({'sellingprice': 'mean', 'mmr': 'mean'}).reset_index()
+
+    df1 = df1.sort_values(by=["Year_month"],ascending=[True])
 
     return df1
 
@@ -182,7 +185,7 @@ def odometer_price_correlation (filtered_df):
     df5_x_vals = np.linspace(df5['odometer'].min(), df5['odometer'].max(), 100)
     df5_y_vals = _log_func(df5_x_vals)
 
-    return df5, df5_x_vals, df5_y_vals
+    return df5, df5_x_vals, df5_y_vals, a, b
 
 def color_price_correlation (filtered_df):
     df6 = filtered_df
