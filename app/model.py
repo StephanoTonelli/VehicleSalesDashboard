@@ -6,6 +6,7 @@ from scipy.stats import pearsonr
 import matplotlib.pyplot as plt
 from scipy import stats
 
+
 def best_brand(filtered_df):
     df_make_value = filtered_df.groupby(["make"])[['sellingprice']].agg(['mean','sum','std'])
 
@@ -76,11 +77,11 @@ def best_seller(filtered_df):
     return df_seller_value1
 
 def best_model_trend(filtered_df):
-    df_best_selling_model_value = df.groupby(["body","make","model","year"])[["year","sellingprice"]].agg(['mean',"sum"])
+    df_best_selling_model_value = filtered_df.groupby(["body","make","model","year"])[["year","sellingprice"]].agg(['mean',"sum"])
     # Flatten the MultiIndex columns
     df_best_selling_model_value.columns = ['_'.join(col).strip() for col in df_best_selling_model_value.columns]
 
-    df_best_selling_model_value1 = df.groupby(["body","make","model"])[["sellingprice"]].sum()
+    df_best_selling_model_value1 = filtered_df.groupby(["body","make","model"])[["sellingprice"]].sum()
 
     #.rename(columns={'sellingprice_x': 'Total Sales Model','sellingprice_y': 'Year Sales Model'}, inplace=True)
     #.sort_values(by=["Total Sales Model"],ascending=False)
@@ -99,14 +100,12 @@ def best_model_trend(filtered_df):
 def average_price_distribution(filtered_df):
     df1 = filtered_df
 
-    # Convert to datetime format
-    df1['saledate'] = pd.to_datetime(df1['saledate'], errors='coerce')
-
-    # Extract only the date part (YYYY-MM-DD)
-    df1['saledate'] = df1['saledate'].dt.date
+    # print(df['saledate'].head())  # Check raw values before conversion
+    # print(df.dtypes)  # Check current data types
+    # df1['saledate'] = df1['saledate'].astype('datetime64[ns, UTC]').dt.strftime("%Y-%m")
 
     # calculates the average of the "Selling Price" and "mmr" columns for each unique value in the "saledate" column
-    df1 = df1.groupby('saledate').agg({'sellingprice': 'mean', 'mmr': 'mean'}).reset_index()
+    df1 = df1.groupby('Year_month').agg({'sellingprice': 'mean', 'mmr': 'mean'}).reset_index()
 
     return df1
 
@@ -122,11 +121,8 @@ def price_distribution_brand_category (filtered_df):
 def seasonal_prices (filtered_df):
     df3 = filtered_df
 
-    # Convert to datetime format
-    df3['saledate'] = pd.to_datetime(df3['saledate'], errors='coerce')
-
     # Extract only the date part (YYYY-MM-DD)
-    df3['Year_month'] = df3['saledate'].dt.strftime('%Y-%m')
+    # df3['Year_month'] = df3['saledate'].astype('datetime64[ns, UTC]').dt.strftime("%Y-%m")
 
     df3.sort_values(by=["saledate"],ascending=[True])
 
@@ -146,11 +142,8 @@ def seasonal_prices (filtered_df):
 def seasonal_sales (filtered_df):
     df4 = filtered_df
 
-    # Convert to datetime format
-    df4['saledate'] = pd.to_datetime(df4['saledate'], errors='coerce')
-
     # Extract only the date part (YYYY-MM-DD)
-    df4['Year_month'] = df4['saledate'].dt.strftime('%Y-%m')
+    # df4['Year_month'] = df4['saledate'].astype('datetime64[ns, UTC]').dt.strftime("%Y-%m")
 
     df4.sort_values(by=["saledate"],ascending=[True])
 
@@ -229,6 +222,7 @@ def transmission_price_correlation (filtered_df):
     return df7, median_order7
 
 def condition_price_correlation (filtered_df):
+
     df8 = filtered_df
     # Drop NaN values and ensure positive odometer values (log is undefined for non-positive values)
     df8 = df8.dropna(subset=['condition', 'sellingprice'])

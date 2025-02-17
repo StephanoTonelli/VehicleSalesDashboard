@@ -8,7 +8,10 @@ import matplotlib.pyplot as plt
 # os.chdir('D:/DocumentsSte/VSCode/Proj1Streamlit')
 
 from app.data_handler import df
-from app.model import condition_price_correlation
+from app.model import best_brand, best_model, best_brand_body_type, best_model_body_type, best_seller, best_model_trend, average_price_distribution
+from app.model import price_distribution_brand_category, seasonal_prices, seasonal_sales, odometer_price_correlation
+from app.model import color_price_correlation, transmission_price_correlation, condition_price_correlation
+
 
 # ----------------------------------------------------------------------------
 ### Page Title
@@ -21,7 +24,7 @@ st.title("Kaggle vehicle data")
 st.sidebar.header("Filters")
 
 # Filter years
-first_year_filtered = st.sidebar.slider("Years", 1990, 2025, 1990)
+first_year_filtered = st.sidebar.slider("Years", df["year"].min(), df["year"].max(), df["year"].min())
 # Filter DataFrame if at least one category is selected
 if first_year_filtered:
     filtered_df = df[(df['year'] >= first_year_filtered)]
@@ -63,6 +66,31 @@ else:
 # ----------------------------------------------------------------------------
 ### Run Models
 
+best_brand_value_id, best_brand_value, best_brand_volume_id, best_brand_volume = best_brand(filtered_df)
+
+best_model_value_id, best_model_value, best_model_volume_id, best_model_volume = best_model(filtered_df)
+
+best_brand_body_type = best_brand_body_type(filtered_df)
+
+best_model_body_type = best_model_body_type(filtered_df)
+
+df_seller_value1 = best_seller(filtered_df)
+
+df_best_selling_model = best_model_trend(filtered_df)
+
+df_average_price_distribution = average_price_distribution(filtered_df)
+
+df_price_distribution_brand_category = price_distribution_brand_category(filtered_df)
+
+df_seasonal_prices = seasonal_prices(filtered_df)
+
+df_seasonal_sales = seasonal_sales(filtered_df)
+
+df_odometer_price_correlation, x_vals_odometer_price_correlation, y_vals_odometer_price_correlation = odometer_price_correlation(filtered_df)
+
+df_color_price_correlation, median_order_color_price_correlation = color_price_correlation(filtered_df)
+
+df_transmission_price_correlation, median_order_transmission_price_correlation = transmission_price_correlation(filtered_df)
 
 df8, df8_x_vals, df8_y_vals, df8_a, df8_b, df8_r_value = condition_price_correlation(filtered_df)
 

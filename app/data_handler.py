@@ -10,5 +10,6 @@ df = pd.DataFrame(data)
 
 df = df.dropna()
 df = df.drop_duplicates()
+df['Year_month'] = df['saledate'].astype('datetime64[ns, UTC]').dt.strftime("%Y-%m")
 
 
